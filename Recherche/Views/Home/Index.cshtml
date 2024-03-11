@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Recherche";
+}
+@model Models.RechercheVM;
+
+<div class="text-center">
+    <a asp-controller="Historique" asp-action="Index">Historique</a>
+    <h1 class="display-4">Bonjour</h1>
+    <p>
+        <form asp-controller="Recherche" asp-action="Create" method="post" id="searchForm">
+
+            <p>Saisisez votre recherche : <input type="text" asp-for="@Model.Value" id="searchInput"> </p>
+            <input type="hidden" value="@DateTime.Now" asp-for="@Model.DateRecherche">
+            <input type="submit" value="Rechercher" id="submitButton" disabled>
+
+        </form>
+    </p>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var searchInput = document.getElementById('searchInput');
+        var submitButton = document.getElementById('submitButton');
+
+        searchInput.addEventListener('input', function () {
+            submitButton.disabled = !searchInput.value.trim();
+        });
+    });
+</script>
